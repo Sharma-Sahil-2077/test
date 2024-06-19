@@ -2,7 +2,8 @@ const Transaction = require('../model/transaction');
 
 exports.getStatistics = async (req, res) => {
   const { month } = req.query;
-  const startDate = new Date(`2023-${month}-01`);
+  const year = req.query.year || 2021; // Default to 2021 if year is not provided
+  const startDate = new Date(`${year}-${month}-01`);
   const endDate = new Date(startDate);
   endDate.setMonth(startDate.getMonth() + 1);
 

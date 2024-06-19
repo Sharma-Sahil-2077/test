@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo,useEffect } from 'react';
 import Pagination from './Pagination';
 import ItemsPerPageSelector from './PerPageSelector';
 
@@ -7,13 +7,19 @@ function TransactionTable({ transactions }) {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [selectedMonth, setSelectedMonth] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
-  const [filteredTransactions, setFilteredTransactions] = useState(transactions);
+  const [filteredTransactions, setFilteredTransactions] = useState(transactions); // Initialize with all transactions
   const [isFiltered, setIsFiltered] = useState(false); // Track if filter is applied
 
   // Calculate total pages based on itemsPerPage
   const totalTransactions = filteredTransactions.length;
   const totalPages = Math.ceil(totalTransactions / itemsPerPage);
-
+  useEffect(() => {
+    setFilteredTransactions(transactions); // Reset to all transactions
+    setSelectedMonth(''); // Reset selected month
+    setSelectedYear(''); // Reset selected year
+    setIsFiltered(false); // Reset filter applied flag
+    setCurrentPage(1); // Reset pagination to first page
+  }, [transactions]);
   // Handle page change
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -79,7 +85,7 @@ function TransactionTable({ transactions }) {
 
   return (
     <div className='flex-col scale-90'>
-      <div className="bg-white shadow-md rounded-lg p-2 overflow-scroll no-scrollbar" style={{ maxHeight: '680px', width: '1200px' }}>
+      <div className="bg-white shadow-md rounded-lg p-2 overflow-scroll no-scrollbar" style={{ maxHeight: '800px', width: '1200px' }}>
         <h2 className="text-2xl font-bold mb-4">Transaction Table</h2>
 
         {/* Month and Year selection */}
