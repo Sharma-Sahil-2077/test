@@ -51,7 +51,7 @@ function Dashboard() {
         {/* Top Section: Filters and Controls */}
         <div className="flex justify-between items-center">
           {/* Search Input */}
-          <div className="flex h-7 w-40 text-center">
+          <div className="flex mt-2 h-7 w-40 text-center">
             <input
               type="text"
               placeholder="Search..."
@@ -90,16 +90,13 @@ function Dashboard() {
           <h2 className='ml-3 w-28 px-4 py-2 flex bg-blue-500 text-white rounded  h-10 cursor-pointer' 
           onClick={()=>setShowGraph(!showgraph)}
            >Bar Graph</h2>
-          
-          
-        
-
         </div>
+
         {showgraph && (
           <div className='absolute  left-0 top-0 h-screen bg-black bg-opacity-70 rounded-md w-screen z-10'>
             <button className='border-2 absolute left-[82%] border-black rounded-lg p-1 top-[15%] bg-white'
             onClick={()=>setShowGraph(false)} >Close</button>
-          <div className='absolute left-[20%] border top-[20%] h-[500px] bg-white rounded-md w-[1000px] z-20 '>
+          <div className='absolute left-[20%] border top-[20%] h-[400px] bg-white rounded-md w-[1000px] z-20 '>
             
               <BarChart/>
           </div>

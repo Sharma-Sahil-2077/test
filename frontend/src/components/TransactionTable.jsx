@@ -84,16 +84,17 @@ function TransactionTable({ transactions }) {
   }, [currentPage, itemsPerPage, filteredTransactions]);
 
   return (
-    <div className='flex-col scale-90'>
+    <div className='flex-col scale-90 '>
       <div className="bg-white shadow-md rounded-lg p-2 overflow-scroll no-scrollbar" style={{ maxHeight: '800px', width: '1200px' }}>
-        <h2 className="text-2xl font-bold mb-4">Transaction Table</h2>
 
         {/* Month and Year selection */}
         <div className="mb-4 flex items-center">
-          <label htmlFor="month" className="mr-2">Month:</label>
+          <label htmlFor="month" className="mr-2"> 
+            <h2 className="text-2xl font-bold mb-4">Transaction Table</h2>
+          </label>
           <select
             id="month"
-            className="border border-gray-300 rounded px-3 py-1"
+            className="border border-gray-300 rounded px-3 -mt-3"
             value={selectedMonth}
             onChange={handleMonthChange}
           >
@@ -112,32 +113,35 @@ function TransactionTable({ transactions }) {
             <option value="12">December</option>
           </select>
 
-          <label htmlFor="year" className="ml-4 mr-2">Year:</label>
-          <input
+          <label htmlFor="year" className="ml-4 mr-2 -mt-3">Year:</label>
+          <select
             id="year"
             type="number"
-            className="border border-gray-300 rounded px-3 py-1"
+            className="border border-gray-300 -mt-3 rounded px-3 py-1"
             value={selectedYear}
             onChange={handleYearChange}
             placeholder="Enter Year"
-          />
+          >
+             <option value="2021">2021</option>
+             <option value="2022">2022</option>
+          </select>
           
           {/* Filter and clear filter buttons */}
           {!isFiltered ? (
-            <button className="ml-4 px-3 py-1 bg-blue-500 text-white rounded" onClick={handleFilter}>Filter</button>
+            <button className="ml-4 px-3 -mt-3 py-1 bg-blue-500 text-white rounded" onClick={handleFilter}>Filter</button>
           ) : (
-            <button className="ml-4 px-3 py-1 bg-red-500 text-white rounded" onClick={clearFilter}>Clear Filter</button>
+            <button className="ml-4 px-3 py-1 -mt-3 bg-red-500 text-white rounded" onClick={clearFilter}>Clear Filter</button>
           )}
         </div>
 
         {/* Transaction table */}
-        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 overflow-scroll">
+        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 overflow-scroll ">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-              <table className="w-full divide-gray-200 overflow-scroll">
-                <thead className="bg-gray-50">
+              <table className="w-full divide-gray-200 overflow-scroll ">
+                <thead className=" bg-amber-500 bg-opacity-30">
                   <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style={{ width: '10%' }}>
+                    <th scope="col" className="px-6  py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style={{ width: '10%' }}>
                       ID
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style={{ width: '300px' }}>
@@ -157,7 +161,7 @@ function TransactionTable({ transactions }) {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200 overflow-y-auto">
+                <tbody className="bg-amber-400 bg-opacity-20 divide-y divide-x divide-gray-700 overflow-y-auto">
                   {visibleTransactions.map((transaction) => (
                     <tr key={transaction._id}>
                       <td className="px-6 py-4 m-2 whitespace-nowrap overflow-x-scroll no-scrollbar" style={{ maxWidth: '100px', overflow: 'scroll' }}>{transaction._id}</td>

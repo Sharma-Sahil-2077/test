@@ -35,7 +35,7 @@ const BarGraph = ({ data }) => {
 
         {/* Graph bars */}
         <div className="flex-1">
-          <div className="grid grid-cols-10 gap-2">
+          <div className="grid grid-cols-10 gap-">
             {data.map((item, index) => (
               <div key={index} className="flex flex-col items-center">
                 <div className="relative w-12 h-40 bg-gray-200 rounded-lg overflow-hidden">
@@ -44,7 +44,7 @@ const BarGraph = ({ data }) => {
                     style={{ height: `${(item.count / maxCount) * 100}%` }}
                   ></div>
                 </div>
-                <div className="mb-2 text-sm mt-4">{item.range}</div>
+                <div className="mb-2 text-xs mt-4 -rotate-45">{item.range}</div>
               </div>
             ))}
           </div>
