@@ -1,4 +1,4 @@
-const Transaction = require('../models/transaction');
+const Transaction = require('../model/transaction');
 
 exports.getPieChart = async (req, res) => {
   const { month } = req.query;

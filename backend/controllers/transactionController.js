@@ -1,4 +1,4 @@
-const Transaction = require('../models/transaction');
+const Transaction = require('../model/transaction');
 
 exports.listTransactions = async (req, res) => {
   const { month, search, page = 1, perPage = 10 } = req.query;

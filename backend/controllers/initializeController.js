@@ -1,5 +1,5 @@
 const axios = require('axios');
-const Transaction = require('../models/transaction');
+const Transaction = require('../model/transaction');
 
 exports.initializeDatabase = async (req, res) => {
   try {
