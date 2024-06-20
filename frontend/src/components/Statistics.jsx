@@ -62,7 +62,7 @@ function Statistics() {
             <option value="November">November</option>
             <option value="December">December</option>
           </select>
-          <select
+          {/* <select
             id="year"
             type="text" // Depending on your backend API, change to "number" if year is expected as number
             className=" w-20 rounded px-1 py-1"
@@ -72,7 +72,7 @@ function Statistics() {
           >
             <option value="2021">2021</option>
             <option value="2022">2022</option>
-            </select>
+            </select> */}
 </div>
           {/* Fetch Statistics Button (inside expanded content) */}
           {expanded&&(

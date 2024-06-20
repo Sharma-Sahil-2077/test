@@ -3,7 +3,8 @@ import TransactionTable from './TransactionTable';
 import MonthSelector from './MonthSelector';
 import axios from 'axios';
 import Statistics from './Statistics';
-import BarChart from './BarChart'; // Import the BarChart component
+import BarChart from './BarChart'; 
+import CombinedData from './CombinedData'
 
 // import PieChart from './PieChart';
 
@@ -11,6 +12,10 @@ function Dashboard() {
   const [transactions, setTransactions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [showgraph, setShowGraph] = useState(false);
+  const [combineddata, setCombinedData] = useState('');
+  const [ month, setMonth]= useState(2)
+  const [show, setShow] = useState(false);
+
 
 
   useEffect(() => {
@@ -44,7 +49,20 @@ function Dashboard() {
     }
   };
 
-    
+
+    const combinedDataApi = async () => {
+
+      try {
+        const response = await axios.get(`http://127.0.0.1:5000/api/combined?month=${month}`);
+        if (response.status !== 200) {
+          throw new Error('Failed to fetch transactions');
+        }
+        const data = response.data;
+        setCombinedData(data);
+      } catch (error) {
+        console.error('Error fetching transactions:', error.message);
+      }
+    }
 
     return (
       <div className="max-w-7xl mx-auto px-4 py-2 justify-between">
@@ -67,7 +85,6 @@ function Dashboard() {
             </button>
           </div>
 
-          {/* Month Selector */}
         </div>
 
         {/* Main Content: Table and Charts */}
@@ -75,11 +92,7 @@ function Dashboard() {
           {/* Transaction Table */}
           <TransactionTable transactions={transactions} />
 
-          {/* Charts Section */}
-          {/* <div>
-          <BarChart transactions={transactions} />
-          <PieChart transactions={transactions} />
-        </div> */}
+         
         </div>
 
         <div className="absolute flex-col justify-center h-[500px] w-[400px] right-0">
@@ -90,19 +103,35 @@ function Dashboard() {
           <h2 className='ml-3 w-28 px-4 py-2 flex bg-blue-500 text-white rounded  h-10 cursor-pointer' 
           onClick={()=>setShowGraph(!showgraph)}
            >Bar Graph</h2>
+           <button className='ml-3 w-28 px-4 py-2 flex mt-5 bg-blue-500 text-white rounded  h-10 cursor-pointer'
+          onClick={()=>setShow(true)} >Combined Data</button>
         </div>
 
+        
         {showgraph && (
           <div className='absolute  left-0 top-0 h-screen bg-black bg-opacity-70 rounded-md w-screen z-10'>
             <button className='border-2 absolute left-[82%] border-black rounded-lg p-1 top-[15%] bg-white'
-            onClick={()=>setShowGraph(false)} >Close</button>
+            onClick={()=>setShowGraph(false) } >Close</button>
           <div className='absolute left-[20%] border top-[20%] h-[400px] bg-white rounded-md w-[1000px] z-20 '>
             
               <BarChart/>
           </div>
+          
           </div>
           )}
-        
+
+          {show && (
+          <div className='absolute  left-0 top-0 h-screen bg-black bg-opacity-70 rounded-md w-screen z-10'>
+            <button className='border-2 absolute left-[89%] border-black rounded-lg p-1 top-[0%] bg-white'
+            onClick={()=>setShow(false)} >Close</button>
+          <div className='absolute left-[8%] border top-[5%] h-[600px] bg-white rounded-md w-[1300px] z-20 '>
+            <CombinedData />
+              
+          </div>
+          
+          </div>
+          )}
+        <h2 className='absolute right-10 text-sm bottom-1 italic'> [ Adjust Page Zoom if things are overlapping ]</h2>
       </div>
     );
   }
