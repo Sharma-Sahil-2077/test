@@ -8,7 +8,7 @@ cd frontend
 npm install
 npm start
 ```
-
+To set up the backend, navigate to the `backend` directory:
 ```bash
 cd backend
 npm install
